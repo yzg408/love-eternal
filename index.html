@@ -29,8 +29,7 @@
     .heart-rain {
       position: fixed;
       top: 0; left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       z-index: 0;
       pointer-events: none;
       overflow: hidden;
@@ -49,7 +48,7 @@
       100% { transform: translateY(105vh) rotate(360deg) scale(0.4); opacity: 0; }
     }
 
-    /* ===== Hero Section ===== */
+    /* ===== Hero ===== */
     .hero {
       position: relative;
       z-index: 1;
@@ -67,10 +66,7 @@
       inset: 0;
       background: radial-gradient(ellipse at center, rgba(120,80,200,0.15) 0%, transparent 70%);
     }
-    .hero-content {
-      position: relative;
-      z-index: 2;
-    }
+    .hero-content { position: relative; z-index: 2; }
     .hero-badge {
       display: inline-block;
       background: linear-gradient(135deg, rgba(255,105,180,0.2), rgba(138,43,226,0.2));
@@ -115,12 +111,7 @@
       background-clip: text;
       font-weight: 600;
     }
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; }
     .btn {
       display: inline-block;
       padding: 0.9rem 2rem;
@@ -131,7 +122,9 @@
       transition: all 0.3s ease;
       cursor: pointer;
       border: none;
+      font-family: inherit;
     }
+    .btn:active { transform: scale(0.96); }
     .btn-primary {
       background: linear-gradient(135deg, #f093fb, #f5576c);
       color: #fff;
@@ -140,6 +133,11 @@
     .btn-primary:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 30px rgba(245,87,108,0.6);
+    }
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
     }
     .btn-outline {
       background: transparent;
@@ -151,6 +149,10 @@
       border-color: #f093fb;
       color: #f093fb;
       transform: translateY(-3px);
+    }
+    .btn-sm {
+      padding: 0.5rem 1.2rem;
+      font-size: 0.85rem;
     }
     .scroll-indicator {
       position: absolute;
@@ -168,8 +170,7 @@
       animation: bounce 2s infinite;
     }
     .scroll-indicator .arrow {
-      width: 20px;
-      height: 20px;
+      width: 20px; height: 20px;
       border-right: 2px solid rgba(224,216,240,0.3);
       border-bottom: 2px solid rgba(224,216,240,0.3);
       transform: rotate(45deg);
@@ -187,10 +188,7 @@
       max-width: 1100px;
       margin: 0 auto;
     }
-    .section-header {
-      text-align: center;
-      margin-bottom: 3.5rem;
-    }
+    .section-header { text-align: center; margin-bottom: 3.5rem; }
     .section-header h2 {
       font-size: clamp(1.8rem, 4vw, 2.8rem);
       font-weight: 700;
@@ -204,8 +202,7 @@
       margin: 0 auto;
     }
     .section-divider {
-      width: 60px;
-      height: 3px;
+      width: 60px; height: 3px;
       background: linear-gradient(90deg, #f093fb, #f5576c);
       border-radius: 2px;
       margin: 1rem auto;
@@ -224,11 +221,16 @@
       gap: 1rem;
       margin-bottom: 2rem;
       flex-wrap: wrap;
+      position: relative;
+    }
+    .msg-input-area .input-group {
+      flex: 1;
+      min-width: 200px;
+      position: relative;
     }
     .msg-input-area input,
     .msg-input-area textarea {
-      flex: 1;
-      min-width: 200px;
+      width: 100%;
       background: rgba(255,255,255,0.05);
       border: 1px solid rgba(255,255,255,0.1);
       border-radius: 12px;
@@ -247,34 +249,51 @@
       width: 100%;
       min-height: 80px;
       resize: vertical;
+      padding-bottom: 2rem;
     }
+    .char-counter {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.8rem;
+      font-size: 0.75rem;
+      color: rgba(224,216,240,0.3);
+      transition: color 0.3s;
+    }
+    .char-counter.warning { color: #f093fb; }
+    .char-counter.danger { color: #f5576c; }
     .msg-input-area .btn {
       align-self: flex-end;
+      flex-shrink: 0;
     }
     .msg-list {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      max-height: 400px;
-      overflow-y: auto;
-      padding-right: 0.5rem;
+      gap: 0.8rem;
+      min-height: 120px;
+      position: relative;
     }
-    .msg-list::-webkit-scrollbar {
-      width: 4px;
+    .msg-list.loading::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 24px; height: 24px;
+      margin: -12px 0 0 -12px;
+      border: 2px solid rgba(240,147,251,0.2);
+      border-top-color: #f093fb;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
     }
-    .msg-list::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    .msg-list::-webkit-scrollbar-thumb {
-      background: rgba(240,147,251,0.3);
-      border-radius: 2px;
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .msg-list::-webkit-scrollbar { width: 4px; }
+    .msg-list::-webkit-scrollbar-track { background: transparent; }
+    .msg-list::-webkit-scrollbar-thumb { background: rgba(240,147,251,0.3); border-radius: 2px; }
     .msg-item {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.05);
       border-radius: 12px;
       padding: 1rem 1.3rem;
-      animation: fadeInUp 0.4s ease;
+      animation: fadeInUp 0.3s ease both;
+      position: relative;
     }
     .msg-item .msg-name {
       font-weight: 600;
@@ -300,61 +319,204 @@
       text-align: center;
       padding: 2rem;
       color: rgba(224,216,240,0.3);
+      width: 100%;
     }
 
     /* ===== Time Capsule ===== */
     .capsule-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
     }
     .capsule-card {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 16px;
-      padding: 2rem;
+      padding: 1.8rem 1.5rem;
       text-align: center;
       transition: all 0.3s ease;
-      cursor: default;
+      cursor: pointer;
       backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
     }
+    .capsule-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(240,147,251,0.05), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .capsule-card:hover::before { opacity: 1; }
     .capsule-card:hover {
       transform: translateY(-5px);
       border-color: rgba(240,147,251,0.3);
       box-shadow: 0 10px 40px rgba(240,147,251,0.1);
     }
+    .capsule-card:active { transform: translateY(-2px); }
     .capsule-icon {
       font-size: 2.5rem;
-      margin-bottom: 1rem;
+      margin-bottom: 0.8rem;
       display: block;
     }
     .capsule-card h3 {
       color: #fff;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       margin-bottom: 0.5rem;
     }
     .capsule-card p {
       color: rgba(224,216,240,0.6);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       line-height: 1.6;
     }
+    .capsule-card .capsule-author {
+      font-size: 0.75rem;
+      color: rgba(240,147,251,0.4);
+      margin-top: 0.8rem;
+    }
+    .add-capsule-card {
+      border: 2px dashed rgba(240,147,251,0.2);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      min-height: 200px;
+    }
+    .add-capsule-card:hover {
+      border-color: rgba(240,147,251,0.5);
+      background: rgba(240,147,251,0.03);
+    }
+    .add-capsule-card .plus-icon {
+      font-size: 2rem;
+      color: rgba(240,147,251,0.4);
+      transition: color 0.3s, transform 0.3s;
+    }
+    .add-capsule-card:hover .plus-icon {
+      color: #f093fb;
+      transform: scale(1.2);
+    }
+
+    /* ===== Modal ===== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-content {
+      background: #1a1a30;
+      border: 1px solid rgba(240,147,251,0.2);
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 520px;
+      width: 100%;
+      position: relative;
+      animation: modalIn 0.3s ease;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+    @keyframes modalIn {
+      from { opacity: 0; transform: scale(0.9) translateY(20px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem; right: 1.2rem;
+      background: none;
+      border: none;
+      color: rgba(224,216,240,0.4);
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: color 0.3s;
+      font-family: inherit;
+    }
+    .modal-close:hover { color: #f093fb; }
+    .modal-icon { font-size: 3rem; display: block; text-align: center; margin-bottom: 1rem; }
+    .modal-title {
+      color: #fff;
+      font-size: 1.4rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+    .modal-meta {
+      text-align: center;
+      color: rgba(224,216,240,0.4);
+      font-size: 0.8rem;
+      margin-bottom: 1.5rem;
+    }
+    .modal-body {
+      color: rgba(224,216,240,0.8);
+      line-height: 1.8;
+      font-size: 0.95rem;
+      white-space: pre-wrap;
+    }
+    .modal-divider {
+      height: 1px;
+      background: rgba(240,147,251,0.15);
+      margin: 1.5rem 0;
+    }
+    .modal-form label {
+      display: block;
+      font-size: 0.85rem;
+      color: rgba(224,216,240,0.6);
+      margin-bottom: 0.4rem;
+    }
+    .modal-form input,
+    .modal-form textarea,
+    .modal-form select {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 0.7rem 1rem;
+      color: #e0d8f0;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      margin-bottom: 1rem;
+      transition: border-color 0.3s;
+    }
+    .modal-form input:focus,
+    .modal-form textarea:focus {
+      border-color: #f093fb;
+    }
+    .modal-form textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+    .modal-form .form-row {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .modal-form .form-row select { flex: 0 0 auto; width: auto; min-width: 80px; }
 
     /* ===== Love Chain ===== */
     .chain-visual {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 0.8rem;
+      gap: 0.6rem;
       margin: 2rem 0;
     }
     .chain-link {
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      gap: 0.6rem;
     }
     .chain-node {
-      width: 50px;
-      height: 50px;
+      position: relative;
+      width: 48px;
+      height: 48px;
       border-radius: 50%;
       background: linear-gradient(135deg, rgba(240,147,251,0.2), rgba(245,87,108,0.2));
       border: 2px solid rgba(240,147,251,0.3);
@@ -364,14 +526,33 @@
       font-size: 1.2rem;
       transition: all 0.3s ease;
       flex-shrink: 0;
+      cursor: default;
     }
     .chain-node:hover {
       transform: scale(1.15);
       border-color: #f093fb;
       box-shadow: 0 0 20px rgba(240,147,251,0.3);
     }
+    .chain-node .tooltip {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(10,10,26,0.95);
+      border: 1px solid rgba(240,147,251,0.3);
+      border-radius: 8px;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.75rem;
+      color: #e0d8f0;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+      z-index: 10;
+    }
+    .chain-node:hover .tooltip { opacity: 1; }
     .chain-connector {
-      width: 30px;
+      width: 24px;
       height: 2px;
       background: linear-gradient(90deg, rgba(240,147,251,0.4), rgba(245,87,108,0.4));
       flex-shrink: 0;
@@ -386,6 +567,28 @@
       color: #f093fb;
       font-size: 1.2rem;
     }
+    .chain-actions {
+      text-align: center;
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 0.8rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    /* small name tag input inline */
+    .chain-name-input {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 0.6rem 1rem;
+      color: #e0d8f0;
+      font-size: 0.85rem;
+      font-family: inherit;
+      outline: none;
+      width: 150px;
+      transition: border-color 0.3s;
+    }
+    .chain-name-input:focus { border-color: #f093fb; }
 
     /* ===== Footer ===== */
     .footer {
@@ -397,30 +600,50 @@
       color: rgba(224,216,240,0.3);
       font-size: 0.85rem;
     }
-    .footer strong {
-      color: rgba(224,216,240,0.5);
-    }
+    .footer strong { color: rgba(224,216,240,0.5); }
 
     /* ===== Toast ===== */
-    .toast {
+    .toast-container {
       position: fixed;
       bottom: 2rem;
       left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: rgba(10,10,26,0.9);
+      transform: translateX(-50%);
+      z-index: 300;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: center;
+      pointer-events: none;
+    }
+    .toast {
+      background: rgba(10,10,26,0.92);
       border: 1px solid rgba(240,147,251,0.3);
       border-radius: 12px;
       padding: 0.8rem 1.5rem;
       color: #e0d8f0;
       font-size: 0.9rem;
-      z-index: 100;
       backdrop-filter: blur(10px);
       opacity: 0;
+      transform: translateY(20px);
       transition: all 0.4s ease;
+      pointer-events: auto;
     }
     .toast.show {
       opacity: 1;
-      transform: translateX(-50%) translateY(0);
+      transform: translateY(0);
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 640px) {
+      .section { padding: 3rem 1.2rem; }
+      .msg-board { padding: 1.5rem; }
+      .msg-input-area { flex-direction: column; }
+      .msg-input-area .input-group { min-width: 100%; }
+      .capsule-grid { grid-template-columns: 1fr; }
+      .chain-node { width: 42px; height: 42px; font-size: 1rem; }
+      .chain-connector { width: 16px; }
+      .modal-content { padding: 1.5rem; }
+      .chain-name-input { width: 120px; }
     }
   </style>
 </head>
@@ -428,7 +651,6 @@
 
   <!-- ===== Starfield Canvas ===== -->
   <canvas id="starfield"></canvas>
-
   <!-- ===== Floating Hearts ===== -->
   <div class="heart-rain" id="heartRain"></div>
 
@@ -462,12 +684,17 @@
     </div>
     <div class="msg-board">
       <div class="msg-input-area">
-        <input type="text" id="msgName" placeholder="你的名字（选填）" maxlength="20">
-        <textarea id="msgText" placeholder="写下你想传递的爱与温暖..." maxlength="200"></textarea>
-        <button class="btn btn-primary" onclick="postMessage()">✨ 发送</button>
+        <div class="input-group">
+          <input type="text" id="msgName" placeholder="你的名字（选填）" maxlength="20">
+        </div>
+        <div class="input-group">
+          <textarea id="msgText" placeholder="写下你想传递的爱与温暖..." maxlength="200"></textarea>
+          <span class="char-counter" id="msgCounter">0/200</span>
+        </div>
+        <button class="btn btn-primary" id="msgSubmitBtn" onclick="postMessage()">✨ 发送</button>
       </div>
       <div class="msg-list" id="msgList">
-        <div class="msg-empty">💭 还没有留言……来做第一个传递爱心的人吧</div>
+        <div class="msg-empty">💭 加载中...</div>
       </div>
     </div>
   </section>
@@ -479,37 +706,8 @@
       <div class="section-divider"></div>
       <p>将此刻的温柔，封存到遥远的未来</p>
     </div>
-    <div class="capsule-grid">
-      <div class="capsule-card">
-        <span class="capsule-icon">📝</span>
-        <h3>写给未来的信</h3>
-        <p>给一年后、十年后、或者永远的自己<br>写一封不会被遗忘的信</p>
-      </div>
-      <div class="capsule-card">
-        <span class="capsule-icon">🎵</span>
-        <h3>时光旋律</h3>
-        <p>记录此刻最触动你的一首歌、一段话<br>让感动在数据中永恒</p>
-      </div>
-      <div class="capsule-card">
-        <span class="capsule-icon">🌱</span>
-        <h3>善举种子</h3>
-        <p>记下一件你做过的温暖小事<br>它会像种子一样，在数字土壤里生长</p>
-      </div>
-      <div class="capsule-card">
-        <span class="capsule-icon">⭐</span>
-        <h3>星空心愿</h3>
-        <p>许下一个愿望，让它成为星空中<br>最亮的那一颗</p>
-      </div>
-      <div class="capsule-card">
-        <span class="capsule-icon">💎</span>
-        <h3>数字遗产</h3>
-        <p>为你珍视的人留下一段话、一份记忆<br>数字永生，爱永不消逝</p>
-      </div>
-      <div class="capsule-card">
-        <span class="capsule-icon">🌈</span>
-        <h3>爱心接力</h3>
-        <p>传递一份善意给下一个人<br>让世界因为你的存在而更温暖</p>
-      </div>
+    <div class="capsule-grid" id="capsuleGrid">
+      <div class="capsule-card" style="grid-column:1/-1;text-align:center;color:rgba(224,216,240,0.3);padding:3rem;">⏳ 加载中...</div>
     </div>
   </section>
 
@@ -520,26 +718,23 @@
       <div class="section-divider"></div>
       <p>每一位传递爱心的人，都是这条链上闪亮的一环</p>
     </div>
-    <div class="chain-visual" id="chainVisual">
-      <div class="chain-link">
-        <div class="chain-node">🤍</div>
-        <div class="chain-connector"></div>
-      </div>
-      <div class="chain-link">
-        <div class="chain-node">💗</div>
-        <div class="chain-connector"></div>
-      </div>
-      <div class="chain-link">
-        <div class="chain-node">❤️</div>
-      </div>
-    </div>
+    <div class="chain-visual" id="chainVisual"></div>
     <div class="chain-counter">
-      已有 <strong id="chainCount">3</strong> 份爱心在此传递，期待你的加入 💫
+      已有 <strong id="chainCount">0</strong> 份爱心在此传递，期待你的加入 💫
     </div>
-    <div style="text-align:center;margin-top:1.5rem;">
-      <button class="btn btn-primary" onclick="addChainLink()">➕ 传递一份爱</button>
+    <div class="chain-actions">
+      <input type="text" class="chain-name-input" id="chainName" placeholder="你的名字（选填）" maxlength="20">
+      <button class="btn btn-primary btn-sm" onclick="addChainLink()">➕ 传递一份爱</button>
     </div>
   </section>
+
+  <!-- ===== Modal Overlay ===== -->
+  <div class="modal-overlay" id="capsuleModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div id="modalBody"></div>
+    </div>
+  </div>
 
   <!-- ===== Footer ===== -->
   <footer class="footer">
@@ -548,14 +743,14 @@
   </footer>
 
   <!-- ===== Toast ===== -->
-  <div class="toast" id="toast"></div>
+  <div class="toast-container" id="toastContainer"></div>
 
   <script>
     // ===== Starfield =====
     const canvas = document.getElementById('starfield');
     const ctx = canvas.getContext('2d');
     let stars = [];
-    let starCount = 200;
+    const STAR_COUNT = 200;
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -566,14 +761,14 @@
 
     function initStars() {
       stars = [];
-      for (let i = 0; i < starCount; i++) {
+      for (let i = 0; i < STAR_COUNT; i++) {
         stars.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
           size: Math.random() * 2.5 + 0.3,
           speed: Math.random() * 0.3 + 0.05,
           opacity: Math.random() * 0.8 + 0.2,
-          hue: Math.random() * 60 + 280, // purple-pink range
+          hue: Math.random() * 60 + 280,
         });
       }
     }
@@ -586,13 +781,10 @@
         ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
         ctx.fillStyle = `hsla(${s.hue}, 80%, 70%, ${s.opacity})`;
         ctx.fill();
-
-        // Subtle glow
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.size * 3, 0, Math.PI * 2);
         ctx.fillStyle = `hsla(${s.hue}, 80%, 70%, ${s.opacity * 0.15})`;
         ctx.fill();
-
         s.y -= s.speed;
         if (s.y < -10) {
           s.y = canvas.height + 10;
@@ -619,130 +811,300 @@
       setTimeout(() => el.remove(), 20000);
     }
     setInterval(createHeart, 2500);
-    // Initial burst
     for (let i = 0; i < 8; i++) {
       setTimeout(createHeart, i * 300);
     }
 
-    // ===== Message Board (localStorage) =====
-    function loadMessages() {
-      const list = document.getElementById('msgList');
-      const msgs = JSON.parse(localStorage.getItem('love_msgs') || '[]');
-      list.innerHTML = '';
-      if (msgs.length === 0) {
-        list.innerHTML = '<div class="msg-empty">💭 还没有留言……来做第一个传递爱心的人吧</div>';
-        return;
+    // ===== API Helpers =====
+    const API = {
+      async getMessages() {
+        const r = await fetch('/api/messages');
+        return r.json();
+      },
+      async postMessage(name, text) {
+        const r = await fetch('/api/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name || '匿名星人', text })
+        });
+        return r.json();
+      },
+      async getCapsules() {
+        const r = await fetch('/api/capsules');
+        return r.json();
+      },
+      async getCapsule(id) {
+        const r = await fetch('/api/capsules/' + id);
+        return r.json();
+      },
+      async createCapsule(data) {
+        const r = await fetch('/api/capsules', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        return r.json();
+      },
+      async getChain() {
+        const r = await fetch('/api/chain');
+        return r.json();
+      },
+      async addChainLink(name) {
+        const r = await fetch('/api/chain', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: name || null })
+        });
+        return r.json();
       }
-      msgs.slice().reverse().forEach((m, i) => {
-        const div = document.createElement('div');
-        div.className = 'msg-item';
-        div.style.animationDelay = (i * 0.05) + 's';
-        div.innerHTML = `
-          <div class="msg-name">${m.name || '匿名星人'}</div>
-          <div class="msg-text">${m.text}</div>
-          <div class="msg-time">${m.time}</div>
+    };
+
+    // ===== Message Board =====
+    async function loadMessages() {
+      const list = document.getElementById('msgList');
+      list.classList.add('loading');
+      try {
+        const msgs = await API.getMessages();
+        list.innerHTML = '';
+        if (msgs.length === 0) {
+          list.innerHTML = '<div class="msg-empty">💭 还没有留言……来做第一个传递爱心的人吧</div>';
+          return;
+        }
+        msgs.forEach((m, i) => {
+          const div = document.createElement('div');
+          div.className = 'msg-item';
+          div.style.animationDelay = (i * 0.04) + 's';
+          div.innerHTML = `
+            <div class="msg-name">${escapeHtml(m.name || '匿名星人')}</div>
+            <div class="msg-text">${escapeHtml(m.text)}</div>
+            <div class="msg-time">${m.created_at}</div>
+          `;
+          list.appendChild(div);
+        });
+      } catch (e) {
+        list.innerHTML = '<div class="msg-empty">⚠️ 加载失败，请刷新重试</div>';
+      } finally {
+        list.classList.remove('loading');
+      }
+    }
+
+    function escapeHtml(str) {
+      const d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    async function postMessage() {
+      const btn = document.getElementById('msgSubmitBtn');
+      if (btn.disabled) return;
+      const name = document.getElementById('msgName').value.trim();
+      const text = document.getElementById('msgText').value.trim();
+      if (!text) { showToast('💭 写点什么再发送吧～'); return; }
+      if (text.length > 200) { showToast('📏 最多200个字哦～'); return; }
+
+      btn.disabled = true;
+      btn.textContent = '⏳ 发送中...';
+      try {
+        await API.postMessage(name, text);
+        document.getElementById('msgName').value = '';
+        document.getElementById('msgText').value = '';
+        document.getElementById('msgCounter').textContent = '0/200';
+        await loadMessages();
+        addChainLink();
+        showToast('🎉 你的爱心已永存于数字宇宙！');
+      } catch (e) {
+        showToast('😢 发送失败，请重试');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '✨ 发送';
+      }
+    }
+
+    // Character counter
+    document.getElementById('msgText').addEventListener('input', function() {
+      const len = this.value.length;
+      const counter = document.getElementById('msgCounter');
+      counter.textContent = len + '/200';
+      counter.className = 'char-counter' + (len > 180 ? ' warning' : '') + (len >= 200 ? ' danger' : '');
+    });
+
+    // Enter to send
+    document.getElementById('msgText').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        postMessage();
+      }
+    });
+
+    // ===== Time Capsule =====
+    async function loadCapsules() {
+      const grid = document.getElementById('capsuleGrid');
+      try {
+        const capsules = await API.getCapsules();
+        grid.innerHTML = '';
+        capsules.forEach(c => {
+          const card = document.createElement('div');
+          card.className = 'capsule-card';
+          card.onclick = () => openCapsuleModal(c.id);
+          card.innerHTML = `
+            <span class="capsule-icon">${c.icon}</span>
+            <h3>${escapeHtml(c.title)}</h3>
+            <p>${escapeHtml(c.content.replace(/\n/g, '<br>'))}</p>
+            <div class="capsule-author">💫 ${escapeHtml(c.author)} 封存</div>
+          `;
+          grid.appendChild(card);
+        });
+        // Add "create" card
+        const addCard = document.createElement('div');
+        addCard.className = 'capsule-card add-capsule-card';
+        addCard.onclick = () => openCreateCapsuleModal();
+        addCard.innerHTML = `
+          <span class="plus-icon">+</span>
+          <p style="color:rgba(224,216,240,0.4);font-size:0.9rem;">封装此刻的温度</p>
         `;
-        list.appendChild(div);
+        grid.appendChild(addCard);
+      } catch (e) {
+        grid.innerHTML = '<div class="capsule-card" style="grid-column:1/-1;text-align:center;color:rgba(224,216,240,0.3);padding:3rem;">⚠️ 加载失败</div>';
+      }
+    }
+
+    function openCapsuleModal(id) {
+      const overlay = document.getElementById('capsuleModal');
+      const body = document.getElementById('modalBody');
+      body.innerHTML = '<div style="text-align:center;padding:2rem;color:rgba(224,216,240,0.3);">⏳ 打开胶囊...</div>';
+      overlay.classList.add('open');
+
+      API.getCapsule(id).then(c => {
+        body.innerHTML = `
+          <span class="modal-icon">${c.icon}</span>
+          <div class="modal-title">${escapeHtml(c.title)}</div>
+          <div class="modal-meta">💫 ${escapeHtml(c.author)} 封存 · ${c.created_at}</div>
+          <div class="modal-body">${escapeHtml(c.content)}</div>
+        `;
+      }).catch(() => {
+        body.innerHTML = '<div style="text-align:center;padding:2rem;color:rgba(240,147,251,0.6);">💔 这个胶囊打不开了...</div>';
       });
     }
 
-    function postMessage() {
-      const nameInput = document.getElementById('msgName');
-      const textInput = document.getElementById('msgText');
-      const name = nameInput.value.trim();
-      const text = textInput.value.trim();
+    function openCreateCapsuleModal() {
+      const overlay = document.getElementById('capsuleModal');
+      const body = document.getElementById('modalBody');
+      const icons = ['📝', '🎵', '🌱', '⭐', '💎', '🌈', '💕', '🌟', '🌸', '🌙', '🎨', '🔥'];
 
-      if (!text) {
-        showToast('💭 写点什么再发送吧～');
-        return;
-      }
-      if (text.length > 200) {
-        showToast('📏 最多200个字哦～');
-        return;
-      }
-
-      const msgs = JSON.parse(localStorage.getItem('love_msgs') || '[]');
-      const now = new Date();
-      const timeStr = now.getFullYear() + '-' +
-        String(now.getMonth()+1).padStart(2,'0') + '-' +
-        String(now.getDate()).padStart(2,'0') + ' ' +
-        String(now.getHours()).padStart(2,'0') + ':' +
-        String(now.getMinutes()).padStart(2,'0');
-
-      msgs.push({ name: name || '匿名星人', text, time: timeStr });
-      localStorage.setItem('love_msgs', JSON.stringify(msgs));
-
-      nameInput.value = '';
-      textInput.value = '';
-      loadMessages();
-      addChainLink();
-      showToast('🎉 你的爱心已永存于数字宇宙！');
+      body.innerHTML = `
+        <span class="modal-icon">📦</span>
+        <div class="modal-title">封装此刻的温度</div>
+        <div class="modal-divider"></div>
+        <div class="modal-form">
+          <div class="form-row">
+            <select id="newCapsuleIcon">${icons.map(i => `<option value="${i}">${i}</option>`).join('')}</select>
+            <input type="text" id="newCapsuleTitle" placeholder="胶囊名称" maxlength="50" style="flex:1;">
+          </div>
+          <input type="text" id="newCapsuleAuthor" placeholder="你的名字（选填）" maxlength="20">
+          <textarea id="newCapsuleContent" placeholder="写下你想封存的一切..." maxlength="500"></textarea>
+          <button class="btn btn-primary" onclick="submitCapsule()" style="width:100%;">✨ 封存</button>
+        </div>
+      `;
+      overlay.classList.add('open');
     }
+
+    async function submitCapsule() {
+      const icon = document.getElementById('newCapsuleIcon').value;
+      const title = document.getElementById('newCapsuleTitle').value.trim();
+      const content = document.getElementById('newCapsuleContent').value.trim();
+      const author = document.getElementById('newCapsuleAuthor').value.trim();
+
+      if (!title) { showToast('📝 给胶囊取个名字吧～'); return; }
+      if (!content) { showToast('💭 写点什么再封存吧～'); return; }
+
+      try {
+        await API.createCapsule({ icon, title, content, author: author || '匿名星人' });
+        closeModal();
+        await loadCapsules();
+        showToast('🎉 你的时间胶囊已封存，爱将永不褪色！');
+      } catch (e) {
+        showToast('😢 封存失败，请重试');
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('capsuleModal').classList.remove('open');
+    }
+    // Close modal on overlay click
+    document.getElementById('capsuleModal').addEventListener('click', function(e) {
+      if (e.target === this) closeModal();
+    });
+    // ESC to close
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
 
     // ===== Love Chain =====
-    function addChainLink() {
+    async function loadChain() {
       const container = document.getElementById('chainVisual');
       const countEl = document.getElementById('chainCount');
-      const nodeEmojis = ['💕', '💗', '💖', '✨', '🌟', '💫', '❤️', '💜', '🩷', '🌸', '🌺', '⭐', '🌙', '☀️'];
-
-      const link = document.createElement('div');
-      link.className = 'chain-link';
-      link.style.animation = 'fadeInUp 0.4s ease';
-
-      const connector = document.createElement('div');
-      connector.className = 'chain-connector';
-      link.appendChild(connector);
-
-      const node = document.createElement('div');
-      node.className = 'chain-node';
-      node.textContent = nodeEmojis[Math.floor(Math.random() * nodeEmojis.length)];
-      link.appendChild(node);
-
-      container.appendChild(link);
-
-      const count = container.querySelectorAll('.chain-node').length;
-      countEl.textContent = count;
-
-      // Save to localStorage
-      localStorage.setItem('love_chain_count', count);
-
-      showToast('💫 爱心链又增加了一环！');
-    }
-
-    // Restore chain count
-    const savedChain = localStorage.getItem('love_chain_count');
-    if (savedChain) {
-      const diff = parseInt(savedChain) - 3;
-      if (diff > 0) {
-        for (let i = 0; i < diff; i++) {
-          const container = document.getElementById('chainVisual');
-          const nodeEmojis = ['💕', '💗', '💖', '✨', '🌟', '💫', '❤️', '💜', '🩷', '🌸', '🌺', '⭐', '🌙', '☀️'];
-          const link = document.createElement('div');
-          link.className = 'chain-link';
-          const connector = document.createElement('div');
-          connector.className = 'chain-connector';
-          link.appendChild(connector);
+      try {
+        const data = await API.getChain();
+        container.innerHTML = '';
+        data.links.forEach((link, i) => {
+          const linkDiv = document.createElement('div');
+          linkDiv.className = 'chain-link';
+          if (i > 0) {
+            const connector = document.createElement('div');
+            connector.className = 'chain-connector';
+            linkDiv.appendChild(connector);
+          }
           const node = document.createElement('div');
           node.className = 'chain-node';
-          node.textContent = nodeEmojis[i % nodeEmojis.length];
-          link.appendChild(node);
-          container.appendChild(link);
-        }
-        document.getElementById('chainCount').textContent = savedChain;
+          node.textContent = link.emoji;
+          if (link.name) {
+            const tooltip = document.createElement('div');
+            tooltip.className = 'tooltip';
+            tooltip.textContent = link.name;
+            node.appendChild(tooltip);
+          }
+          linkDiv.appendChild(node);
+          container.appendChild(linkDiv);
+        });
+        countEl.textContent = data.count;
+      } catch (e) {
+        container.innerHTML = '<div style="color:rgba(224,216,240,0.3);">⚠️ 加载失败</div>';
       }
     }
+
+    async function addChainLink() {
+      const name = document.getElementById('chainName').value.trim();
+      try {
+        const data = await API.addChainLink(name);
+        document.getElementById('chainName').value = '';
+        await loadChain();
+        showToast('💫 爱心链又增加了一环！');
+      } catch (e) {
+        showToast('😢 传递失败，请重试');
+      }
+    }
+    document.getElementById('chainName').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') addChainLink();
+    });
 
     // ===== Toast =====
     function showToast(msg) {
-      const el = document.getElementById('toast');
+      const container = document.getElementById('toastContainer');
+      const el = document.createElement('div');
+      el.className = 'toast';
       el.textContent = msg;
-      el.classList.add('show');
-      clearTimeout(el._timer);
-      el._timer = setTimeout(() => el.classList.remove('show'), 2500);
+      container.appendChild(el);
+      requestAnimationFrame(() => el.classList.add('show'));
+      setTimeout(() => {
+        el.classList.remove('show');
+        setTimeout(() => el.remove(), 400);
+      }, 2800);
     }
 
-    // Load messages on page load
+    // ===== Init =====
     loadMessages();
+    loadCapsules();
+    loadChain();
   </script>
 </body>
 </html>
